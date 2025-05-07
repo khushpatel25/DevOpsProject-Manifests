@@ -9,8 +9,6 @@ spec:
     repoURL: https://github.com/khushpatel25/DevOpsProject-Manifests
     targetRevision: HEAD
     path: overlays/staging
-    directory:
-      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: devops-staging

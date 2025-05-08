@@ -4,8 +4,6 @@ metadata:
   name: devops-app
   labels:
     environment: prod
-  annotations:
-    kargo.akuity.io/authorized-stage: kargo-demo:prod
 spec:
   template:
     metadata:

@@ -3,8 +3,10 @@ kind: Application
 metadata:
   name: devops-prod-app
   namespace: argocd
-annotations:
-  kargo.akuity.io/authorized-stage: kargo-demo:prod
+  annotations:
+    kargo.akuity.io/authorized-stage: kargo-demo:prod
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:

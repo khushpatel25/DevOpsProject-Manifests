@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: app
-          image: kp6657/devopsproject:latest
+          image: docker.io/kp6657/devopsproject:latest
           ports:
             - containerPort: 6565

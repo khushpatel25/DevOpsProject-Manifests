@@ -9,7 +9,7 @@ spec:
     metadata:
       labels:
         environment: prod
-    spec:
-      containers:
-        - name: app
-          image: kp6657/devopsproject:latest
+    # spec:
+    #   containers:
+    #     - name: app
+    #       image: kp6657/devopsproject:latest

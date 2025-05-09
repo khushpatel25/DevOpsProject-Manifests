@@ -8,4 +8,4 @@ patchesStrategicMerge:
 - service-patch.yaml
 images:
 - name: docker.io/kp6657/devopsproject
-  newTag: "2"
+  newTag: 1.0.2

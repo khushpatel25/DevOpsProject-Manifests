@@ -9,4 +9,3 @@ patchesStrategicMerge:
 images:
 - name: docker.io/kp6657/devopsproject
   newTag: "2"
-

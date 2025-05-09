@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-service
+  labels:
+    app: devops-app
+spec:
+  selector:
+    app: devops-app
+  ports:
+    - port: 80
+      targetPort: 6565
+  type: LoadBalancer

@@ -1,4 +1,4 @@
-# 🚀 DevOps Project: Full Multi-Stage CI/CD & GitOps Pipeline 
+# 🚀 Multi-Stage GitOps Pipeline with Continuous Promotion using Kargo by Akuity! 
 
 This project demonstrates an end-to-end DevOps pipeline that automates the process of building, promoting, and deploying containerized applications to a **Kubernetes** cluster across **development**, **staging**, and **production** environments. It leverages modern tools and methodologies, including:
 
@@ -7,6 +7,7 @@ This project demonstrates an end-to-end DevOps pipeline that automates the proce
 - **Argo CD** for GitOps-based Continuous Delivery
 - **Kustomize** for managing environment-specific Kubernetes configurations
 - **Kubernetes** as the underlying container orchestration platform
+- **GitOps** as the methodology to drive deployments declaratively via Git  
 
 The entire pipeline is structured to ensure that every code change is built, scanned for vulnerabilities, promoted through validation stages, and finally deployed to a Kubernetes cluster—without manual intervention.
 

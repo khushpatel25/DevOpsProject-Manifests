@@ -86,7 +86,7 @@ This seamless integration of tools ensures fast, secure, and reliable delivery o
     6. **Trigger Argo CD Sync**:  
     Once merged, Argo CD syncs the Kubernetes manifests to apply the new image in the cluster.
 
-    7. **Run Analysis Template**:
+    7. **Run Analysis Template**:  
     After deployment, Kargo runs an analysis template that performs an HTTP check to validate the health and availability of the application. Only if this check succeeds does the freight become eligible for promotion to the next stage.
 
    ![Kargo Dashboard](/images/kargo-dashboard.png)

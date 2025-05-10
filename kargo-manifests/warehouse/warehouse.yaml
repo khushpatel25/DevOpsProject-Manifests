@@ -1,0 +1,14 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: devops-warehouse
+  namespace: kargo-demo
+spec:
+  freightCreationPolicy: Automatic
+  interval: 5m0s
+  subscriptions:
+    - image:
+        discoveryLimit: 20
+        imageSelectionStrategy: SemVer
+        strictSemvers: true
+        repoURL: docker.io/kp6657/devopsproject

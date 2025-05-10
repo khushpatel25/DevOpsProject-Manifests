@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: devops-staging-app-test
+  namespace: kargo-demo
+spec:
+  metrics:
+    - name: http-check
+      provider:
+        web:
+          method: GET
+          timeoutSeconds: 5
+          url: http://devops-service.devops-staging.svc.cluster.local:80/
+      successCondition: result.message == "Welcome to DevOps Project!"

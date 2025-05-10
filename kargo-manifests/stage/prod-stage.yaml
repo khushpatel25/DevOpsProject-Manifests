@@ -1,0 +1,79 @@
+kind: Stage
+apiVersion: kargo.akuity.io/v1alpha1
+metadata:
+  name: prod
+  namespace: kargo-demo
+  annotations:
+    kargo.akuity.io/color: green
+spec:
+  promotionTemplate:
+    spec:
+      steps:
+        - config:
+            checkout:
+              - branch: main
+                path: ${{ vars.srcPath }}
+              - branch: ${{ vars.targetBranch }}
+                create: true
+                path: ${{ vars.outPath }}
+            repoURL: ${{ vars.gitopsRepo }}
+          uses: git-clone
+        - as: update-image
+          config:
+            images:
+              - image: ${{ vars.imageRepo }}
+                tag: ${{ quote(imageFrom(vars.imageRepo).Tag) }}
+            path: ${{ vars.outPath }}/overlays/production
+          uses: kustomize-set-image
+        - as: commit
+          config:
+            messageFromSteps:
+              - update-image
+            path: ${{ vars.outPath }}
+          uses: git-commit
+        - config:
+            path: ${{ vars.outPath }}
+          uses: git-push
+        - as: open-pr
+          config:
+            repoURL: ${{ vars.gitopsRepo }}
+            sourceBranch: ${{ vars.targetBranch }}
+            targetBranch: main
+            title: Update image to ${{ quote(imageFrom(vars.imageRepo).Tag) }}
+          uses: git-open-pr
+        - as: wait-for-pr
+          config:
+            prNumber: ${{ outputs['open-pr'].prNumber }}
+            provider: github
+            repoURL: ${{ vars.gitopsRepo }}
+          uses: git-wait-for-pr
+        - config:
+            apps:
+              - name: devops-prod-app
+                sources:
+                  - desiredRevision: ${{ outputs['wait-for-pr'].commit }}
+                    repoURL: ${{ vars.gitopsRepo }}
+                    updateTargetRevision: true
+          uses: argocd-update
+      vars:
+        - name: gitopsRepo
+          value: https://github.com/khushpatel25/DevOpsProject-Manifests
+        - name: imageRepo
+          value: docker.io/kp6657/devopsproject
+        - name: srcPath
+          value: ./src
+        - name: outPath
+          value: ./out
+        - name: targetBranch
+          value: stage/prod
+  requestedFreight:
+    - origin:
+        kind: Warehouse
+        name: devops-warehouse
+      sources:
+        direct: false
+        stages:
+          - staging
+  verification:
+    analysisTemplates:
+      - name: devops-prod-app-test
